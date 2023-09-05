@@ -1,0 +1,25 @@
+{
+    "weather":"الطقس",
+    "title_splash":"الملابس المناسبة، لا يوجد طقس سيء",
+    "body_splash":"شاهد الطقس حول العالم واحفظ مواقعك المفضلة.",
+    "find_location":"البحث عن الموقع",
+    "my_locations":"مواقعي",
+    "settings":"الاعدادات",
+    "today":"اليوم",
+    "tomorrow":"غداً",
+    "partially_cloudy":"غائم جزئياً",
+    "rain":"مطر",
+    "clear":"صافِ",
+    "feels_like":"يبدو وكأنه",
+    "wind":"الرياح",
+    "degree":"الدرجة",
+    "pressure":"الضغط",
+    "show_details":"عرض التفاصيل",
+    "language":"اللغة",
+    "theme":"المظهر",
+    "add_locations":"أضف مواقعك",
+    "how_user_search":"استخدم شريط البحث للعثور على الموقع الذي تحتاجه ثم قم بإضافته.",
+    "cancel":"إلغاء"
+
+
+}

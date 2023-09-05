@@ -1,0 +1,23 @@
+{
+    "weather":"Weather",
+    "title_splash":"Right clothes, no bad weather",
+    "body_splash":"See the weather around the world and save your favourite locations.",
+    "find_location":"Find location",
+    "my_locations":"My locations",
+    "settings":"Settings",
+    "today":"Today",
+    "tomorrow":"Tomorrow",
+    "partially_cloudy":"Partially cloudy",
+    "rain":"Rain",
+    "clear":"Clear",
+    "feels_like":"Feels like",
+    "wind":"Wind",
+    "degree":"Degree",
+    "pressure":"Pressure",
+    "show_details":"Show Details",
+    "language":"Language",
+    "theme":"Theme",
+    "add_locations":"Add your Locations",
+    "how_user_search":"Use the search bar to find and then add the location you need.",
+    "cancel":"Cancel"
+} 
