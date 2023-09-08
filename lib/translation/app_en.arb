@@ -19,5 +19,9 @@
     "theme":"Theme",
     "add_locations":"Add your Locations",
     "how_user_search":"Use the search bar to find and then add the location you need.",
-    "cancel":"Cancel"
+    "cancel":"Cancel",
+    "settings":"Settings",
+    "light":"Light",
+    "dark":"Dark",
+    "system":"System"
 } 

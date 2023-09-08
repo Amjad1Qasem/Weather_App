@@ -1,9 +1,12 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/blocs/localization/localization_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/blocs/theme/theme_cubit.dart';
 import 'package:weather_app/router/app_router.dart';
+import 'package:weather_app/themes/app_themes.dart';
 import 'package:weather_app/translation/app_translations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,8 +37,8 @@ class MyApp extends StatelessWidget {
             }
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              // theme: AppThemes.light,
-              // darkTheme: AppThemes.dark,
+              theme: AppTheme.light,
+              darkTheme: AppTheme.dark,
               locale: localizationState.locale,
               themeMode: themeState.themeMode,
               supportedLocales: AppTranslation.all,
