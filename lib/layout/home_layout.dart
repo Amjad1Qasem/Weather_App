@@ -25,6 +25,7 @@ class _HomeLayoutState extends State<HomeLayout> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         currentIndex: _currentIndex,
         items: const [
           BottomNavigationBarItem(

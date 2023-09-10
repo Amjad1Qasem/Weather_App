@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:weather_app/model/class.dart';
+import 'package:weather_app/models/class.dart';
 
-class WeatherInHourItem extends StatefulWidget {
-  const WeatherInHourItem({super.key, required this.model});
-  final WeatherInDay model;
+class WeatherHourlyModelItem extends StatefulWidget {
+  const WeatherHourlyModelItem({super.key, required this.model});
+  final WeatherDailyModel model;
 
   @override
-  State<WeatherInHourItem> createState() => _WeatherInHourItemState();
+  State<WeatherHourlyModelItem> createState() => _WeatherHourlyModelItemState();
 }
 
-class _WeatherInHourItemState extends State<WeatherInHourItem> {
-  RangeValues _value = RangeValues(20.roundToDouble(), 40.roundToDouble());
+class _WeatherHourlyModelItemState extends State<WeatherHourlyModelItem> {
+  final RangeValues _value =
+      RangeValues(20.roundToDouble(), 40.roundToDouble());
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -79,9 +80,9 @@ class _WeatherInHourItemState extends State<WeatherInHourItem> {
               RangeSlider(
                 values: _value,
                 onChanged: (newValue) {
-                  setState(() {
-                    _value = newValue;
-                  });
+                  // setState(() {
+                  //   _value = newValue;
+                  // });
                 },
                 min: 5,
                 max: 60,

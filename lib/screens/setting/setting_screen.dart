@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather_app/blocs/localization/localization_cubit.dart';
 import 'package:weather_app/blocs/theme/theme_cubit.dart';
 import 'package:weather_app/constants/app_images.dart';
+import 'package:weather_app/screens/widgets/toggle_buttons.dart';
 import 'package:weather_app/utilities/translation.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -14,15 +16,21 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  // late ThemeState themeCubitState = BlocProvider.of<ThemeCubit>(context).state;
-  // late bool valueSelected = themeCubitState is ThemeFetched &&
-  //     (themeCubitState as ThemeFetched).themeMode == ThemeMode.light;
-  List<bool> isSelectedDegree = [true, false];
-  List<bool> isSelectedWind = [true, false];
-  List<bool> isSelectedPressure = [true, false];
-  List<bool> isSelectedLanguage = [true, false];
-  // List<bool> valueSelected = [true, false,false];
-  String valueSelected = 'Light';
+  late ThemeState themeCubitState = BlocProvider.of<ThemeCubit>(context).state;
+  late String valueSelected = themeCubitState is ThemeFetched &&
+          (themeCubitState as ThemeFetched).themeMode == ThemeMode.light
+      ? translation(context).light
+      : translation(context).dark;
+
+  late LocalizationState localizationCubitState =
+      BlocProvider.of<LocalizationCubit>(context).state;
+  late String languageSelected = localizationCubitState
+              is LocalizationFetched &&
+          (localizationCubitState as LocalizationFetched).locale.languageCode ==
+              'en'
+      ? translation(context).light
+      : translation(context).dark;
+
   bool isSelectedDetails = false;
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
@@ -130,142 +138,37 @@ class _SettingScreenState extends State<SettingScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 31.h,
-                        width: 132.w,
-                        child: ToggleButtons(
-                          constraints: BoxConstraints(
-                              minWidth: 60.w,
-                              maxWidth: 62.w,
-                              minHeight: kMinInteractiveDimension),
-                          isSelected: isSelectedDegree,
-                          selectedColor: Colors.white,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fillColor: Theme.of(context).colorScheme.onPrimary,
-                          renderBorder: true,
-                          borderColor: Theme.of(context).colorScheme.onPrimary,
-                          borderWidth: 1,
-                          borderRadius: BorderRadius.circular(6.r),
-                          selectedBorderColor:
-                              Theme.of(context).colorScheme.onPrimary,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                              child:
-                                  Text('°C', style: TextStyle(fontSize: 16.sp)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                              child:
-                                  Text('°F', style: TextStyle(fontSize: 16.sp)),
-                            ),
-                          ],
-                          onPressed: (int newIndex) {
-                            setState(() {
-                              for (int index = 0;
-                                  index < isSelectedDegree.length;
-                                  index++) {
-                                if (index == newIndex) {
-                                  isSelectedDegree[index] = true;
-                                } else {
-                                  isSelectedDegree[index] = false;
-                                }
-                              }
-                            });
-                          },
-                        ),
+                      ToggleButtonsWidget(
+                        isSelected: const [true, false],
+                        firstTextButton: '°C',
+                        lastTextButton: '°F',
+                        onPressed: (val) {
+                          Null;
+                        },
                       ),
                       const Spacer(),
-                      SizedBox(
-                        height: 31.h,
-                        width: 132.w,
-                        child: ToggleButtons(
-                          constraints: BoxConstraints(
-                              minWidth: 60.w,
-                              maxWidth: 62.w,
-                              minHeight: kMinInteractiveDimension),
-                          isSelected: isSelectedWind,
-                          selectedColor: Colors.white,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fillColor: Theme.of(context).colorScheme.onPrimary,
-                          renderBorder: true,
-                          borderColor: Theme.of(context).colorScheme.onPrimary,
-                          borderWidth: 1,
-                          borderRadius: BorderRadius.circular(6.r),
-                          selectedBorderColor:
-                              Theme.of(context).colorScheme.onPrimary,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                              child: Text('m/s',
-                                  style: TextStyle(fontSize: 16.sp)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                              child: Text('Km/h',
-                                  style: TextStyle(fontSize: 16.sp)),
-                            ),
-                          ],
-                          onPressed: (int newIndex) {
-                            setState(() {
-                              for (int index = 0;
-                                  index < isSelectedWind.length;
-                                  index++) {
-                                if (index == newIndex) {
-                                  isSelectedWind[index] = true;
-                                } else {
-                                  isSelectedWind[index] = false;
-                                }
-                              }
-                            });
-                          },
-                        ),
+                      ToggleButtonsWidget(
+                        isSelected: const [true, false],
+                        firstTextButton: 'm/s',
+                        lastTextButton: 'Km/h',
+                        onPressed: (val) {
+                          setState(() {
+                            if (val == 0) {
+                            } else {}
+                          });
+                        },
                       ),
                       const Spacer(),
-                      SizedBox(
-                        height: 31.h,
-                        width: 132.w,
-                        child: ToggleButtons(
-                          constraints: BoxConstraints(
-                              minWidth: 60.w,
-                              maxWidth: 62.w,
-                              minHeight: kMinInteractiveDimension),
-                          isSelected: isSelectedPressure,
-                          selectedColor: Colors.white,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fillColor: Theme.of(context).colorScheme.onPrimary,
-                          renderBorder: true,
-                          borderColor: Theme.of(context).colorScheme.onPrimary,
-                          borderWidth: 1,
-                          borderRadius: BorderRadius.circular(6.r),
-                          selectedBorderColor:
-                              Theme.of(context).colorScheme.onPrimary,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                              child: Text('mmHg',
-                                  style: TextStyle(fontSize: 16.sp)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                              child: Text('hPa',
-                                  style: TextStyle(fontSize: 16.sp)),
-                            ),
-                          ],
-                          onPressed: (int newIndex) {
-                            setState(() {
-                              for (int index = 0;
-                                  index < isSelectedPressure.length;
-                                  index++) {
-                                if (index == newIndex) {
-                                  isSelectedPressure[index] = true;
-                                } else {
-                                  isSelectedPressure[index] = false;
-                                }
-                              }
-                            });
-                          },
-                        ),
+                      ToggleButtonsWidget(
+                        isSelected: const [true, false],
+                        firstTextButton: 'mmH',
+                        lastTextButton: 'hPa',
+                        onPressed: (val) {
+                          setState(() {
+                            if (val == 0) {
+                            } else {}
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -308,50 +211,32 @@ class _SettingScreenState extends State<SettingScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      SizedBox(
-                        height: 31.h,
-                        width: 132.w,
-                        child: ToggleButtons(
-                          constraints: BoxConstraints(
-                              minWidth: 60.w,
-                              maxWidth: 62.w,
-                              minHeight: kMinInteractiveDimension),
-                          isSelected: isSelectedLanguage,
-                          selectedColor: Colors.white,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fillColor: Theme.of(context).colorScheme.onPrimary,
-                          renderBorder: true,
-                          borderColor: Theme.of(context).colorScheme.onPrimary,
-                          borderWidth: 1,
-                          borderRadius: BorderRadius.circular(6.r),
-                          selectedBorderColor:
-                              Theme.of(context).colorScheme.onPrimary,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                              child:
-                                  Text('EN', style: TextStyle(fontSize: 16.sp)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                              child:
-                                  Text('AR', style: TextStyle(fontSize: 16.sp)),
-                            ),
-                          ],
-                          onPressed: (int newIndex) {
-                            setState(() {
-                              for (int index = 0;
-                                  index < isSelectedLanguage.length;
-                                  index++) {
-                                if (index == newIndex) {
-                                  isSelectedLanguage[index] = true;
-                                } else {
-                                  isSelectedLanguage[index] = false;
-                                }
-                              }
-                            });
-                          },
-                        ),
+                      ToggleButtonsWidget(
+                        isSelected: [
+                          (BlocProvider.of<LocalizationCubit>(context).state
+                                      as LocalizationFetched)
+                                  .locale
+                                  .languageCode ==
+                              'ar',
+                          (BlocProvider.of<LocalizationCubit>(context).state
+                                      as LocalizationFetched)
+                                  .locale
+                                  .languageCode ==
+                              'en'
+                        ],
+                        firstTextButton: 'AR',
+                        lastTextButton: 'EN',
+                        onPressed: (value) {
+                          setState(() {
+                            if (value == 0) {
+                              BlocProvider.of<LocalizationCubit>(context)
+                                  .arabic();
+                            } else {
+                              BlocProvider.of<LocalizationCubit>(context)
+                                  .english();
+                            }
+                          });
+                        },
                       ),
                       const Spacer(),
                       DropdownButton(
@@ -367,6 +252,11 @@ class _SettingScreenState extends State<SettingScreen> {
                           setState(() {
                             valueSelected = newValue!;
                           });
+                          if (newValue == translation(context).light) {
+                            BlocProvider.of<ThemeCubit>(context).light();
+                          } else {
+                            BlocProvider.of<ThemeCubit>(context).dark();
+                          }
                         },
                       ),
                       const Spacer(),

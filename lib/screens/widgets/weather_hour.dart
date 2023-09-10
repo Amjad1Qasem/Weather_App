@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:weather_app/model/class.dart';
+import 'package:weather_app/models/class.dart';
 
-Widget weatherInHourItem(BuildContext context, WeatherInHour model) => Column(
+Widget weatherHourlyModelItem(BuildContext context, WeatherCurrentModel model) =>
+ Column(
       children: [
         Container(
           width: 56.w,
@@ -13,7 +14,7 @@ Widget weatherInHourItem(BuildContext context, WeatherInHour model) => Column(
           child: Padding(
             padding: EdgeInsets.all(10.0.sp),
             child: Image(
-              image: AssetImage(model.image),
+              image: AssetImage(model.image!),
               width: 32.w,
               height: 32.h,
             ),
@@ -23,14 +24,14 @@ Widget weatherInHourItem(BuildContext context, WeatherInHour model) => Column(
           height: 2.h,
         ),
         Text(
-          model.hour,
+          model.currentDate!,
           style: Theme.of(context).textTheme.labelSmall,
         ),
         SizedBox(
           height: 2.h,
         ),
         Text(
-          model.degree,
+          model.status!,
           style: Theme.of(context).textTheme.labelMedium,
         )
       ],

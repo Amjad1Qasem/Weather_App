@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/constants/app_images.dart';
+import 'package:weather_app/layout/home_layout.dart';
 import 'package:weather_app/router/app_router.dart';
+import 'package:weather_app/screens/search/search_screen.dart';
 import 'package:weather_app/translation/app_translations.dart';
 import 'package:weather_app/utilities/translation.dart';
 
@@ -11,8 +13,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-         SafeArea(
+    return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.sp),
         child: Column(
@@ -45,7 +46,11 @@ class SplashScreen extends StatelessWidget {
               width: 258.w,
               child: ElevatedButton(
                   onPressed: () {
-                    context.goNamed(AppRouter.searchScreen);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SearchScreen()),
+                    );
                   },
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(

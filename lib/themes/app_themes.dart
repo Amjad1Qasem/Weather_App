@@ -28,7 +28,8 @@ abstract class AppTheme {
                 fontWeight: FontWeight.w500,
                 color: AppColors.darkBlue)),
         titleMedium: GoogleFonts.poppins(
-            textStyle: TextStyle(fontSize: 28.sp, color: AppColors.goldenrod)),
+            textStyle: TextStyle(fontSize: 28.sp, 
+            color: AppColors.goldenrod)),
         titleSmall: GoogleFonts.poppins(
             textStyle: TextStyle(
           fontSize: 20.sp,
