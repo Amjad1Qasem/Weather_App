@@ -101,9 +101,19 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.all(30.0.sp),
           child: Column(
             children: [
+              // FutureBuilder<WeatherCurrentModel>(
+              // future: WeatherCurrentController.getCurrentWeather(
+              // cityNmae: 'Damascus'),
+              // builder: (context, snapshot) {
+
+              //   if (snapshot.hasData) {
+              //     print('Error');
+              //     final weather = snapshot.data!;
+              // return
               Row(
                 children: [
                   Text(
+                    // weather.location.name,
                     'Damascus',
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
@@ -117,6 +127,12 @@ class HomeScreen extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary,
                   )
                 ],
+                // );
+                //   } else if (snapshot.hasError) {
+                //     return Text('${snapshot.error}');
+                //   }
+                //   return const CircularProgressIndicator();
+                // }
               ),
               SizedBox(
                 height: 20.h,
@@ -145,18 +161,18 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      weather.currentDate!,
+                                      'weather.location.country,',
                                       style:
                                           Theme.of(context).textTheme.bodySmall,
                                     ),
                                     Text(
-                                      '${weather.currentTemp!}C',
+                                      '${weather.current.tempc}C',
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelLarge,
                                     ),
                                     Text(
-                                      '${weather.status}  Feels like ${weather.currentTemp}C',
+                                      '${weather.current.condition.text}  Feels like ${weather.current.tempc}C',
                                       textAlign: TextAlign.start,
                                       maxLines: 2,
                                       style: Theme.of(context)
@@ -195,7 +211,7 @@ class HomeScreen extends StatelessWidget {
                 width: double.infinity.w,
                 child: FutureBuilder<WeatherCurrentModel>(
                     future: WeatherCurrentController.getCurrentWeather(
-                      cityNmae: 'London',
+                      cityNmae: 'Lebanon',
                     ),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
@@ -209,7 +225,7 @@ class HomeScreen extends StatelessWidget {
                           separatorBuilder: (context, index) => SizedBox(
                                 width: 20.w,
                               ),
-                          itemCount: 7);
+                          itemCount: 12);
                     }),
               ),
               Expanded(

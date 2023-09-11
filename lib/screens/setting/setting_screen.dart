@@ -67,6 +67,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ],
           )),
       DropdownMenuItem(
+          // enabled: false,
           value: translation(context).system,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -224,8 +225,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                   .languageCode ==
                               'en'
                         ],
-                        firstTextButton: 'AR',
-                        lastTextButton: 'EN',
+                        firstTextButton: 'Ar',
+                        lastTextButton: 'En',
                         onPressed: (value) {
                           setState(() {
                             if (value == 0) {
@@ -241,6 +242,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       const Spacer(),
                       DropdownButton(
                         iconSize: 0,
+                        dropdownColor: Theme.of(context).scaffoldBackgroundColor,
                         underline: Container(
                           color: Theme.of(context).colorScheme.onSecondary,
                           width: 5.w,

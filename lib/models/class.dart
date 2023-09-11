@@ -1,31 +1,9 @@
-// class WeatherHourlyModel {
-//   String hour;
-//   String degree;
-//   String image;
-//   WeatherHourlyModel({
-//     required this.hour,
-//     required this.degree,
-//     required this.image,
-//   });
-//   factory WeatherHourlyModel.fromJson(dynamic json) {
-//     return WeatherHourlyModel(
-//       hour: json['location']['localtime'],
-//       degree: json['current']['temp_c'],
-//       image: json['current']['condition']['icon'],
-//     );
-//   }
-//   @override
-//   String toString() {
-//     return 'hour =$hour' 'degree =$degree' 'image =$image';
-//   }
-// }
-
 class WeatherDailyModel {
-  final String image;
-  final String date;
-  final String maxDegree;
-  final String minDegree;
-  final String status;
+  String image;
+  String date;
+  String maxDegree;
+  String minDegree;
+  String status;
   WeatherDailyModel({
     required this.image,
     required this.date,
@@ -34,43 +12,113 @@ class WeatherDailyModel {
     required this.status,
   });
 }
+///////////////////
 
-class WeatherCurrentModel {
-  String ?locationName;
-  String ?currentTemp;
-  String ?image;
-  String ?currentDate;
-  String ?status;
-  // String maxDegree;
-  // String minDegree;
+// class WeatherDailyModel {
+//    String? date;
+//    Forecastday ?forecastday;
 
-  WeatherCurrentModel({
-    required this.locationName,
-    required this.currentTemp,
-    required this.image,
-    required this.currentDate,
-    required this.status,
-    // required this.maxDegree,
-    // required this.minDegree,
+//   factory WeatherDailyModel.fromJson(Map<String, dynamic> json) {
+//     return WeatherDailyModel(
+//       date: json['date'],
+//       forecastday: Forecastday.fromJson(json['forecastday'][0]),
+//     );
+//   }
+// }
+
+// class Forecastday {
+//    MaxtempC maxtempC;
+//    MaxtempF maxtempF;
+//    MintempC mintempC;
+//    MintempF mintempF;
+//    AvgtempC avgtempC;
+//    AvgtempF avgtempF;
+//    Condition ?condition;
+
+//   factory Forecastday.fromJson(Map<String, dynamic> json) {
+//     return Forecastday(
+//       maxtempC: json['maxtemp_c'],
+//       maxtempF: json['maxtemp_f'],
+//       mintempC: json['mintemp_c'],
+//       mintempF: json['mintemp_f'],
+//       avgtempC: json['avgtemp_c'],
+//       avgtempF: json['avgtemp_f'],
+//       condition: Condition.fromJson(json['condition']),
+
+//       hour: [
+//         Hour.fromJson(hour)
+//       ],
+//     );
+//   }
+// }
+
+// .........
+class Condition {
+  final String text;
+  final String icon;
+
+  Condition({
+    required this.text,
+    required this.icon,
   });
-  factory WeatherCurrentModel.fromJson(dynamic json) {
-    return WeatherCurrentModel(
-      locationName: json['location']['name'],
-      currentTemp: json['current']['temp_c'],
-      image: json['current']['condition']['icon'],
-      currentDate: json['location']['localtime'],
-      status: json['current']['condition']['text'],
-      // maxDegree: json['forecast']['forecastday']['maxtemp_c'],
-      // minDegree: json['forecast']['forecastday']['mintemp_c'],
+
+  factory Condition.fromJson(Map<String, dynamic> json) {
+    return Condition(
+      text: json['text'] as String,
+      icon: json['icon'] as String,
     );
   }
-  @override
-  String toString() {
-    return 'locationName =$locationName'
-    'currentTemp =$currentTemp'
-    'image =$image'
-    'currentDate =$currentDate'
-    'status =$status'
-     ;
+}
+
+class Current {
+  final String lastupdated;
+  final double tempc;
+  final double tempf;
+  final Condition condition;
+
+  Current({
+    required this.lastupdated,
+    required this.tempc,
+    required this.tempf,
+    required this.condition,
+  });
+  factory Current.fromJson(Map<String, dynamic> json) {
+    return Current(
+      lastupdated: json['last_updated'] as String,
+      tempc: json['temp_c'] as double,
+      tempf: json['temp_f'] as double,
+      condition: Condition.fromJson(json['condition']),
+    );
+  }
+}
+
+class Location {
+  final String name;
+  final String country;
+  final String localtime;
+
+  Location(
+      {required this.name, required this.country, required this.localtime});
+
+  factory Location.fromJson(Map<String, dynamic> json) {
+    return Location(
+      name: json['name'],
+      country: json['country'],
+      localtime: json['localtime'],
+    );
+  }
+}
+
+class WeatherCurrentModel {
+  Location location;
+  Current current;
+
+  WeatherCurrentModel({required this.location, required this.current});
+
+  factory WeatherCurrentModel.fromJson(Map<String, dynamic> json) {
+    return WeatherCurrentModel(
+      location: Location.fromJson(json['location']),
+      current: Current.fromJson(json['current']),
+    );
   }
 }

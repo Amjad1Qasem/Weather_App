@@ -23,5 +23,7 @@
     "settings":"Settings",
     "light":"Light",
     "dark":"Dark",
-    "system":"System"
+    "system":"System",
+    "search":"Search",
+    "home":"Home"
 } 

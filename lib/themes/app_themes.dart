@@ -28,8 +28,7 @@ abstract class AppTheme {
                 fontWeight: FontWeight.w500,
                 color: AppColors.darkBlue)),
         titleMedium: GoogleFonts.poppins(
-            textStyle: TextStyle(fontSize: 28.sp, 
-            color: AppColors.goldenrod)),
+            textStyle: TextStyle(fontSize: 28.sp, color: AppColors.goldenrod)),
         titleSmall: GoogleFonts.poppins(
             textStyle: TextStyle(
           fontSize: 20.sp,
@@ -65,6 +64,8 @@ abstract class AppTheme {
               fontWeight: FontWeight.w400,
               color: AppColors.darkBlue),
         ),
+        
+      
       ));
 
   static ThemeData get dark => ThemeData(
@@ -83,7 +84,7 @@ abstract class AppTheme {
           textStyle: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w300,
-              color: AppColors.white),
+              color: AppColors.darkBlue),
         ),
         bodyMedium: GoogleFonts.poppins(
             textStyle: TextStyle(
@@ -127,5 +128,6 @@ abstract class AppTheme {
               fontWeight: FontWeight.w400,
               color: AppColors.white),
         ),
+      
       ));
 }

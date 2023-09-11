@@ -14,7 +14,7 @@ Widget weatherHourlyModelItem(BuildContext context, WeatherCurrentModel model) =
           child: Padding(
             padding: EdgeInsets.all(10.0.sp),
             child: Image(
-              image: AssetImage(model.image!),
+              image: AssetImage(model.current.condition.text),
               width: 32.w,
               height: 32.h,
             ),
@@ -24,14 +24,14 @@ Widget weatherHourlyModelItem(BuildContext context, WeatherCurrentModel model) =
           height: 2.h,
         ),
         Text(
-          model.currentDate!,
+          model.current.lastupdated.toString(),
           style: Theme.of(context).textTheme.labelSmall,
         ),
         SizedBox(
           height: 2.h,
         ),
         Text(
-          model.status!,
+          model.current.condition.text,
           style: Theme.of(context).textTheme.labelMedium,
         )
       ],

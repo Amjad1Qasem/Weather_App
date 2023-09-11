@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/controllers/controller.dart';
+import 'package:weather_app/models/class.dart';
 import 'package:weather_app/utilities/translation.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -104,12 +105,23 @@ class _SearchScreenState extends State<SearchScreen> {
                           ],
                         ),
                       ),
-                      Row(
-                        children: [
-                          TextButton(
-                              onPressed: () {}, child: const Text('Syrai'))
-                        ],
-                      )
+                      // FutureBuilder<WeatherCurrentModel>(
+                      //     future: WeatherCurrentController.getCurrentWeather(
+                      //         cityNmae: locations!),
+                      //     builder: (context, snapshot) {
+                      //       if (!snapshot.hasData) {
+                      //         return const Center(
+                      //             child: CircularProgressIndicator());
+                      //       }
+                      //       final weather = snapshot.data!;
+                      //       return Row(
+                      //         children: [
+                      //           TextButton(
+                      //               onPressed: () {}, child:  Text('${weather.location!.name},${weather.location!.country}'))
+                      //         ],
+                      //       );
+                      //     })
+               
                     ],
                   ),
                 ),
