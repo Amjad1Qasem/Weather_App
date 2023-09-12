@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/models/class.dart';
 
-Widget weatherHourlyModelItem(BuildContext context, WeatherCurrentModel model) =>
+Widget weatherHourlyModelItem(BuildContext context, WeatherHourlyModel model) =>
  Column(
       children: [
         Container(
@@ -14,7 +14,7 @@ Widget weatherHourlyModelItem(BuildContext context, WeatherCurrentModel model) =
           child: Padding(
             padding: EdgeInsets.all(10.0.sp),
             child: Image(
-              image: AssetImage(model.current.condition.text),
+              image: AssetImage(model.image),
               width: 32.w,
               height: 32.h,
             ),
@@ -24,14 +24,14 @@ Widget weatherHourlyModelItem(BuildContext context, WeatherCurrentModel model) =
           height: 2.h,
         ),
         Text(
-          model.current.lastupdated.toString(),
+          model.hour,
           style: Theme.of(context).textTheme.labelSmall,
         ),
         SizedBox(
           height: 2.h,
         ),
         Text(
-          model.current.condition.text,
+          model.degree,
           style: Theme.of(context).textTheme.labelMedium,
         )
       ],

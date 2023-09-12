@@ -6,32 +6,33 @@ import 'package:weather_app/controllers/weather_hourly_controller.dart';
 import 'package:weather_app/models/class.dart';
 import 'package:weather_app/screens/widgets/weather_day.dart';
 import 'package:weather_app/screens/widgets/weather_hour.dart';
+import 'package:weather_app/utilities/translation.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   String weatherCondition = 'Partially cloudy';
   String degree = '24°';
-  // List<WeatherHourlyModel> listOfWeatherHourlyModel = [
-  //   WeatherHourlyModel(image: AppImages.clear, hour: 'now', degree: '24°'),
-  //   WeatherHourlyModel(image: AppImages.cloudy, hour: '13.00', degree: '23°'),
-  //   WeatherHourlyModel(image: AppImages.cloudy, hour: '13.00', degree: '22°'),
-  //   WeatherHourlyModel(
-  //       image: AppImages.partialyCloudy, hour: '13.00', degree: '22°'),
-  //   WeatherHourlyModel(
-  //       image: AppImages.partialyCloudy, hour: '14.00', degree: '20°'),
-  //   WeatherHourlyModel(
-  //       image: AppImages.partialyCloudy, hour: '15.00', degree: '20°'),
-  //   WeatherHourlyModel(
-  //       image: AppImages.rainPartiallyCloudy, hour: '16.00', degree: '20'),
-  //   WeatherHourlyModel(
-  //       image: AppImages.rainPartiallyCloudy, hour: '17.00', degree: '20'),
-  //   WeatherHourlyModel(image: AppImages.rain, hour: '18.00', degree: '19°'),
-  //   WeatherHourlyModel(image: AppImages.rain, hour: '19.00', degree: '19°'),
-  //   WeatherHourlyModel(image: AppImages.rain, hour: '20.00', degree: '18°'),
-  //   WeatherHourlyModel(image: AppImages.moon, hour: '21.00', degree: '15°'),
-  //   WeatherHourlyModel(image: AppImages.moon, hour: '23.00', degree: '14°'),
-  // ];
+  List<WeatherHourlyModel> listOfWeatherHourlyModel = [
+    WeatherHourlyModel(image: AppImages.clear, hour: 'now', degree: '24°'),
+    WeatherHourlyModel(image: AppImages.cloudy, hour: '13.00', degree: '23°'),
+    WeatherHourlyModel(image: AppImages.cloudy, hour: '13.00', degree: '22°'),
+    WeatherHourlyModel(
+        image: AppImages.partialyCloudy, hour: '13.00', degree: '22°'),
+    WeatherHourlyModel(
+        image: AppImages.partialyCloudy, hour: '14.00', degree: '20°'),
+    WeatherHourlyModel(
+        image: AppImages.partialyCloudy, hour: '15.00', degree: '20°'),
+    WeatherHourlyModel(
+        image: AppImages.rainPartiallyCloudy, hour: '16.00', degree: '20'),
+    WeatherHourlyModel(
+        image: AppImages.rainPartiallyCloudy, hour: '17.00', degree: '20'),
+    WeatherHourlyModel(image: AppImages.rain, hour: '18.00', degree: '19°'),
+    WeatherHourlyModel(image: AppImages.rain, hour: '19.00', degree: '19°'),
+    WeatherHourlyModel(image: AppImages.rain, hour: '20.00', degree: '18°'),
+    WeatherHourlyModel(image: AppImages.moon, hour: '21.00', degree: '15°'),
+    WeatherHourlyModel(image: AppImages.moon, hour: '23.00', degree: '14°'),
+  ];
 
   List<WeatherDailyModel> listOfWeatherDailyModel = [
     WeatherDailyModel(
@@ -101,15 +102,6 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.all(30.0.sp),
           child: Column(
             children: [
-              // FutureBuilder<WeatherCurrentModel>(
-              // future: WeatherCurrentController.getCurrentWeather(
-              // cityNmae: 'Damascus'),
-              // builder: (context, snapshot) {
-
-              //   if (snapshot.hasData) {
-              //     print('Error');
-              //     final weather = snapshot.data!;
-              // return
               Row(
                 children: [
                   Text(
@@ -127,12 +119,6 @@ class HomeScreen extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary,
                   )
                 ],
-                // );
-                //   } else if (snapshot.hasError) {
-                //     return Text('${snapshot.error}');
-                //   }
-                //   return const CircularProgressIndicator();
-                // }
               ),
               SizedBox(
                 height: 20.h,
@@ -145,63 +131,47 @@ class HomeScreen extends StatelessWidget {
                       color: Theme.of(context).colorScheme.onSecondary),
                   child: Padding(
                     padding: EdgeInsets.all(20.0.sp),
-                    child: FutureBuilder<WeatherCurrentModel>(
-                        future: WeatherCurrentController.getCurrentWeather(
-                            cityNmae: 'London'),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          }
-                          final weather = snapshot.data!;
-                          return Row(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'weather.location.country,',
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
-                                    Text(
-                                      '${weather.current.tempc}C',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge,
-                                    ),
-                                    Text(
-                                      '${weather.current.condition.text}  Feels like ${weather.current.tempc}C',
-                                      textAlign: TextAlign.start,
-                                      maxLines: 2,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall,
-                                    )
-                                  ],
-                                ),
+                              Text(
+                                'Damascus',
+                                style: Theme.of(context).textTheme.bodySmall,
                               ),
-                              Expanded(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsetsDirectional.only(start: 10.sp),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image(
-                                        image: const AssetImage(
-                                            AppImages.partialyCloudy),
-                                        width: 120.w,
-                                        height: 120.h,
-                                      )
-                                    ],
-                                  ),
-                                ),
+                              Text(
+                                '24°c',
+                                style: Theme.of(context).textTheme.labelLarge,
+                              ),
+                              Text(
+                                '${translation(context).partially_cloudy}  Feels like 24°c',
+                                textAlign: TextAlign.start,
+                                maxLines: 2,
+                                style: Theme.of(context).textTheme.displaySmall,
                               )
                             ],
-                          );
-                        }),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.only(start: 10.sp),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image(
+                                  image: const AssetImage(
+                                      AppImages.partialyCloudy),
+                                  width: 120.w,
+                                  height: 120.h,
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   )),
               SizedBox(
                 height: 20.h,
@@ -209,24 +179,14 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 150.h,
                 width: double.infinity.w,
-                child: FutureBuilder<WeatherCurrentModel>(
-                    future: WeatherCurrentController.getCurrentWeather(
-                      cityNmae: 'Lebanon',
-                    ),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      final weather = snapshot.data!;
-                      return ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) =>
-                              weatherHourlyModelItem(context, weather),
-                          separatorBuilder: (context, index) => SizedBox(
-                                width: 20.w,
-                              ),
-                          itemCount: 12);
-                    }),
+                child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => weatherHourlyModelItem(
+                        context, listOfWeatherHourlyModel[index]),
+                    separatorBuilder: (context, index) => SizedBox(
+                          width: 20.w,
+                        ),
+                    itemCount: listOfWeatherHourlyModel.length),
               ),
               Expanded(
                 child: ListView.separated(
