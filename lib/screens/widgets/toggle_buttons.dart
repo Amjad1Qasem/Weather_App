@@ -6,14 +6,14 @@ import 'package:weather_app/blocs/localization/localization_cubit.dart';
 class ToggleButtonsWidget extends StatefulWidget {
   ToggleButtonsWidget(
       {super.key,
-      this.onPressed,
+       this.onPressed,
       required this.firstTextButton,
       required this.isSelected,
       required this.lastTextButton});
-  List<bool> isSelected = [true, false];
+   List<bool> isSelected = [true, false];
   String firstTextButton;
   String lastTextButton;
-  Function(int)? onPressed;
+   Function(int)? onPressed;
 
   @override
   State<ToggleButtonsWidget> createState() => _ToggleButtonsWidgetState();

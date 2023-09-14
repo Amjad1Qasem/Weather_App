@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/blocs/localization/localization_cubit.dart';
 import 'package:weather_app/blocs/theme/theme_cubit.dart';
 import 'package:weather_app/constants/app_images.dart';
@@ -19,8 +20,8 @@ class _SettingScreenState extends State<SettingScreen> {
   late ThemeState themeCubitState = BlocProvider.of<ThemeCubit>(context).state;
   late String valueSelected = themeCubitState is ThemeFetched &&
           (themeCubitState as ThemeFetched).themeMode == ThemeMode.light
-      ? translation(context).light
-      : translation(context).dark;
+      ? 'light'
+      : 'dark';
 
   late LocalizationState localizationCubitState =
       BlocProvider.of<LocalizationCubit>(context).state;
@@ -28,19 +29,22 @@ class _SettingScreenState extends State<SettingScreen> {
               is LocalizationFetched &&
           (localizationCubitState as LocalizationFetched).locale.languageCode ==
               'en'
-      ? translation(context).light
-      : translation(context).dark;
+      ? 'light'
+      : 'dark';
 
+  List<bool> isSelTemp = [true, false];
+  List<bool> isSelWind = [true, false];
+  List<bool> isSelPressure = [true, false];
   bool isSelectedDetails = false;
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
       DropdownMenuItem(
-          value: translation(context).light,
+          value: 'light',
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                translation(context).light,
+                'light',
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               Image(
@@ -51,12 +55,12 @@ class _SettingScreenState extends State<SettingScreen> {
             ],
           )),
       DropdownMenuItem(
-          value: translation(context).dark,
+          value: 'dark',
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                translation(context).dark,
+                'dark',
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               Image(
@@ -85,6 +89,24 @@ class _SettingScreenState extends State<SettingScreen> {
           )),
     ];
     return menuItems;
+  }
+
+  late SharedPreferences tempIsCele;
+
+  @override
+  void initState() {
+    super.initState();
+    initSharedPreferences();
+  }
+
+  void initSharedPreferences() async {
+    tempIsCele = await SharedPreferences.getInstance();
+    setState(() {
+      setState(() {
+        isSelTemp[0] = tempIsCele.getBool('isSelTemp_0') ?? false;
+        isSelTemp[1] = tempIsCele.getBool('isSelTemp_1') ?? true;
+      });
+    });
   }
 
   @override
@@ -140,34 +162,56 @@ class _SettingScreenState extends State<SettingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ToggleButtonsWidget(
-                        isSelected: const [true, false],
+                        isSelected: isSelTemp,
                         firstTextButton: '°C',
                         lastTextButton: '°F',
-                        onPressed: (val) {
-                          Null;
-                        },
-                      ),
-                      const Spacer(),
-                      ToggleButtonsWidget(
-                        isSelected: const [true, false],
-                        firstTextButton: 'm/s',
-                        lastTextButton: 'Km/h',
-                        onPressed: (val) {
+                        onPressed: (index) {
                           setState(() {
-                            if (val == 0) {
-                            } else {}
+                            if (index == 0) {
+                              isSelTemp[0] = true;
+                              isSelTemp[1] = false;
+                              tempIsCele.setBool('isSelTemp_0', true);
+                              tempIsCele.setBool('isSelTemp_1', false);
+                            } else {
+                              isSelTemp[0] = false;
+                              isSelTemp[1] = true;
+                              tempIsCele.setBool('isSelTemp_0', false);
+                              tempIsCele.setBool('isSelTemp_1', true);
+                            }
                           });
                         },
                       ),
                       const Spacer(),
                       ToggleButtonsWidget(
-                        isSelected: const [true, false],
+                        isSelected: isSelWind,
+                        firstTextButton: 'm/s',
+                        lastTextButton: 'Km/h',
+                        onPressed: (index) {
+                          setState(() {
+                            if (index == 0) {
+                              isSelWind[0] = true;
+                              isSelWind[1] = false;
+                            } else {
+                              isSelWind[0] = false;
+                              isSelWind[1] = true;
+                            }
+                          });
+                        },
+                      ),
+                      const Spacer(),
+                      ToggleButtonsWidget(
+                        isSelected: isSelPressure,
                         firstTextButton: 'mmH',
                         lastTextButton: 'hPa',
-                        onPressed: (val) {
+                        onPressed: (index) {
                           setState(() {
-                            if (val == 0) {
-                            } else {}
+                            if (index == 0) {
+                              isSelPressure[0] = true;
+                              isSelPressure[1] = false;
+                            } else {
+                              isSelPressure[0] = false;
+                              isSelPressure[1] = true;
+                            }
                           });
                         },
                       ),
@@ -242,7 +286,8 @@ class _SettingScreenState extends State<SettingScreen> {
                       const Spacer(),
                       DropdownButton(
                         iconSize: 0,
-                        dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+                        dropdownColor:
+                            Theme.of(context).scaffoldBackgroundColor,
                         underline: Container(
                           color: Theme.of(context).colorScheme.onSecondary,
                           width: 5.w,
@@ -254,11 +299,12 @@ class _SettingScreenState extends State<SettingScreen> {
                           setState(() {
                             valueSelected = newValue!;
                           });
-                          if (newValue == translation(context).light) {
+                          if (newValue == 'light') {
                             BlocProvider.of<ThemeCubit>(context).light();
                           } else {
                             BlocProvider.of<ThemeCubit>(context).dark();
                           }
+                          setState(() {});
                         },
                       ),
                       const Spacer(),

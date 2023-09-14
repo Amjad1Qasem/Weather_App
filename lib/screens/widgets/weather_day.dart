@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/models/class.dart';
 
-class WeatherHourlyModelItem extends StatefulWidget {
-  const WeatherHourlyModelItem({super.key, required this.model});
-  final WeatherDailyModel model;
+class WeatherDailyModelItem extends StatefulWidget {
+  const WeatherDailyModelItem({super.key, required this.model, required this.isCelios});
+  final WeatherDayModel model;
+  final bool isCelios;
 
   @override
-  State<WeatherHourlyModelItem> createState() => _WeatherHourlyModelItemState();
+  State<WeatherDailyModelItem> createState() => _WeatherDailyModelItemState();
 }
 
-class _WeatherHourlyModelItemState extends State<WeatherHourlyModelItem> {
-  final RangeValues _value =
-      RangeValues(20.roundToDouble(), 40.roundToDouble());
+class _WeatherDailyModelItemState extends State<WeatherDailyModelItem> {
+ 
+  @override
+  void initState() {
+    super.initState();
+   
+  }
+
+
+  late final RangeValues _value = RangeValues(
+    widget.isCelios
+        ? widget.model.minDegreec.roundToDouble()
+        : widget.model.minDegreef.roundToDouble(),
+    widget.isCelios
+        ? widget.model.maxDegreec.roundToDouble()
+        : widget.model.maxDegreef.roundToDouble(),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -27,7 +44,7 @@ class _WeatherHourlyModelItemState extends State<WeatherHourlyModelItem> {
           child: Padding(
             padding: EdgeInsets.all(10.0.sp),
             child: Image(
-              image: AssetImage(widget.model.image),
+              image: NetworkImage(widget.model.image),
               width: 10.w,
               height: 10.h,
             ),
@@ -44,7 +61,7 @@ class _WeatherHourlyModelItemState extends State<WeatherHourlyModelItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.model.date,
+                  widget.model.date.split(' ').first,
                   maxLines: 1,
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
@@ -68,11 +85,11 @@ class _WeatherHourlyModelItemState extends State<WeatherHourlyModelItem> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    '${_value.start.toString()}°',
+                    '${_value.start.truncate()}°',
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   Text(
-                    '${_value.end.toString()}°',
+                    '${_value.end.truncate()}°',
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ],
@@ -84,8 +101,8 @@ class _WeatherHourlyModelItemState extends State<WeatherHourlyModelItem> {
                   //   _value = newValue;
                   // });
                 },
-                min: 5,
-                max: 60,
+                min: -20,
+                max: 80,
                 activeColor: const Color(0xff85B0E2),
                 inactiveColor: const Color(0xff6e8096),
                 onChangeEnd: (value) {
