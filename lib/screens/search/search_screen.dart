@@ -5,11 +5,11 @@ import 'package:weather_app/blocs/search/search_cubit.dart';
 import 'package:weather_app/screens/home/home_screen.dart';
 import 'package:weather_app/utilities/translation.dart';
 
- late String location ='Damascus';
+  String location ='Damascus';
 
 class SearchScreen extends StatefulWidget {
-  SearchScreen({super.key, });
-  // String location;
+ const SearchScreen({super.key, });
+
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -60,7 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     onEditingComplete: () {
                                       final searchCubit =
                                           context.read<SearchCubit>();
-                                      searchCubit.search(location!);
+                                      searchCubit.search(location);
                                       FocusScope.of(context).unfocus();
                                     },
                                     style:
