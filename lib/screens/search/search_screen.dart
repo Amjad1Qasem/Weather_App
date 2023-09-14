@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/blocs/search/search_cubit.dart';
-import 'package:weather_app/controllers/controller.dart';
-import 'package:weather_app/layout/home_layout.dart';
-import 'package:weather_app/models/class.dart';
 import 'package:weather_app/screens/home/home_screen.dart';
 import 'package:weather_app/utilities/translation.dart';
 
+ late String location ='Damascus';
+
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  SearchScreen({super.key, });
+  // String location;
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -18,7 +18,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   static TextEditingController searchController = TextEditingController();
   var formkey = GlobalKey<FormState>();
-  String? location;
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +60,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                     onEditingComplete: () {
                                       final searchCubit =
                                           context.read<SearchCubit>();
-                                      if (location != null) {
-                                        searchCubit.search(location!);
-                                        FocusScope.of(context).unfocus();
-                                      }
+                                      searchCubit.search(location!);
+                                      FocusScope.of(context).unfocus();
                                     },
                                     style:
                                         Theme.of(context).textTheme.bodySmall,
@@ -159,7 +156,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                HomeScreen()));
+                                                const HomeScreen()));
                                   },
                                   child: Text(
                                     '${state.currentModel.location.country} ,${state.currentModel.location.name} .',
@@ -171,22 +168,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                           );
                         }),
-                        // FutureBuilder<WeatherCurrentModel>(
-                        //     future: WeatherCurrentController.getCurrentWeather(
-                        //         cityNmae: locations!),
-                        //     builder: (context, snapshot) {
-                        //       if (!snapshot.hasData) {
-                        //         return const Center(
-                        //             child: CircularProgressIndicator());
-                        //       }
-                        //       final weather = snapshot.data!;
-                        //       return Row(
-                        //         children: [
-                        //           TextButton(
-                        //               onPressed: () {}, child:  Text('${weather.location!.name},${weather.location!.country}'))
-                        //         ],
-                        //       );
-                        //     })
                       ],
                     ),
                   ),

@@ -1,6 +1,7 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/models/class.dart';
 
 class weatherHourlyModelItem extends StatefulWidget {
@@ -34,6 +35,7 @@ class _weatherHourlyModelItemState extends State<weatherHourlyModelItem> {
             child: Padding(
               padding: EdgeInsets.all(10.0.sp),
               child: Image(
+                fit: BoxFit.cover,
                 image: NetworkImage(widget.model.image),
                 width: 32.w,
                 height: 32.h,

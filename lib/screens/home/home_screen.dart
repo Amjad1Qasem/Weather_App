@@ -4,8 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/constants/app_images.dart';
 import 'package:weather_app/controllers/controller.dart';
 import 'package:weather_app/controllers/weather_daily_controller.dart';
-import 'package:weather_app/controllers/weather_hourly_controller.dart';
 import 'package:weather_app/models/class.dart';
+import 'package:weather_app/screens/search/search_screen.dart';
 import 'package:weather_app/screens/widgets/weather_day.dart';
 import 'package:weather_app/screens/widgets/weather_hour.dart';
 
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               FutureBuilder<WeatherCurrentModel>(
                   future: WeatherCurrentController.getCurrentWeather(
-                      cityName: 'Damascus'),
+                      cityName: location),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.all(20.0.sp),
                     child: FutureBuilder<WeatherCurrentModel>(
                         future: WeatherCurrentController.getCurrentWeather(
-                            cityName: 'Damascus'),
+                            cityName: location),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
                             return const Center(
@@ -98,9 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      weather.location.country,
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
+                                      weather.location.localtime
+                                          .split('15:34')
+                                          .first,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall,
                                     ),
                                     Text(
                                       isCelios
@@ -131,6 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image(
+                                        fit: BoxFit.cover,
                                         image: NetworkImage(
                                           weather.current.condition.icon,
                                         ),
@@ -150,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               FutureBuilder(
                   future: WeatherDailyController.getDailyWeather(
-                      cityNmae: 'Canada'),
+                      cityNmae: location),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());

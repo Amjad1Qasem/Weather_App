@@ -12,7 +12,9 @@
 //   });
 // }
 
-import 'dart:developer';
+
+
+// ignore_for_file: prefer_interpolation_to_compose_strings
 
 class WeatherDayModel {
   String date;

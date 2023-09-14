@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:weather_app/constants/app_images.dart';
-import 'package:weather_app/layout/home_layout.dart';
-import 'package:weather_app/router/app_router.dart';
 import 'package:weather_app/screens/search/search_screen.dart';
-import 'package:weather_app/translation/app_translations.dart';
 import 'package:weather_app/utilities/translation.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -49,7 +45,7 @@ class SplashScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SearchScreen()),
+                          builder: (context) =>  SearchScreen()),
                     );
                   },
                   style: ButtonStyle(

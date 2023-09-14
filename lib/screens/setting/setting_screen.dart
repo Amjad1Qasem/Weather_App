@@ -72,12 +72,12 @@ class _SettingScreenState extends State<SettingScreen> {
           )),
       DropdownMenuItem(
           // enabled: false,
-          value: translation(context).system,
+          value: 'system',
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                translation(context).system,
+                'system',
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               Image(

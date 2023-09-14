@@ -6,7 +6,7 @@ import 'package:weather_app/blocs/localization/localization_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/blocs/theme/theme_cubit.dart';
 import 'package:weather_app/layout/home_layout.dart';
-import 'package:weather_app/router/app_router.dart';
+
 import 'package:weather_app/themes/app_themes.dart';
 import 'package:weather_app/translation/app_translations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

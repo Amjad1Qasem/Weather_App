@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/models/class.dart';
 
 class WeatherDailyModelItem extends StatefulWidget {
-  const WeatherDailyModelItem({super.key, required this.model, required this.isCelios});
+  const WeatherDailyModelItem(
+      {super.key, required this.model, required this.isCelios});
   final WeatherDayModel model;
   final bool isCelios;
 
@@ -13,13 +13,10 @@ class WeatherDailyModelItem extends StatefulWidget {
 }
 
 class _WeatherDailyModelItemState extends State<WeatherDailyModelItem> {
- 
   @override
   void initState() {
     super.initState();
-   
   }
-
 
   late final RangeValues _value = RangeValues(
     widget.isCelios
@@ -44,6 +41,7 @@ class _WeatherDailyModelItemState extends State<WeatherDailyModelItem> {
           child: Padding(
             padding: EdgeInsets.all(10.0.sp),
             child: Image(
+              fit: BoxFit.cover,
               image: NetworkImage(widget.model.image),
               width: 10.w,
               height: 10.h,
@@ -85,11 +83,15 @@ class _WeatherDailyModelItemState extends State<WeatherDailyModelItem> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    '${_value.start.truncate()}°',
+                    widget.isCelios
+                        ? '${_value.start.truncate()}°'
+                        : '${_value.start.truncate()}',
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   Text(
-                    '${_value.end.truncate()}°',
+                    widget.isCelios
+                        ? '${_value.end.truncate()}°'
+                        : '${_value.end.truncate()}',
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ],
@@ -102,7 +104,7 @@ class _WeatherDailyModelItemState extends State<WeatherDailyModelItem> {
                   // });
                 },
                 min: -20,
-                max: 80,
+                max: 100,
                 activeColor: const Color(0xff85B0E2),
                 inactiveColor: const Color(0xff6e8096),
                 onChangeEnd: (value) {

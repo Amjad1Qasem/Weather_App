@@ -17,7 +17,7 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   List<Widget> screens = [
     const SplashScreen(),
-    HomeScreen(),
+    const HomeScreen(),
     const SettingScreen()
   ];
 
