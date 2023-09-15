@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                   width: double.infinity.w,
-                  height: MediaQuery.of(context).size.height / 3.7,
+                  height: MediaQuery.of(context).size.height / 4.7,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0.r),
                       color: Theme.of(context).colorScheme.onSecondary),
@@ -113,8 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     Text(
                                       isCelios
-                                          ? '${weather.current.condition.text}  Feels like  ${weather.current.tempc.truncate()}°'
-                                          : '${weather.current.condition.text}  Feels like  ${weather.current.tempf.truncate()}',
+                                          ? '${weather.current.condition.text}  \nFeels like  ${weather.current.tempc.truncate()}°'
+                                          : '${weather.current.condition.text}  \nFeels like  ${weather.current.tempf.truncate()}',
                                       textAlign: TextAlign.start,
                                       maxLines: 2,
                                       style: Theme.of(context)
