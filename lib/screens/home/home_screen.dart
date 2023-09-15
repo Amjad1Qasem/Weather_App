@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                   width: double.infinity.w,
-                  height: 189.h,
+                  height: MediaQuery.of(context).size.height / 3.7,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0.r),
                       color: Theme.of(context).colorScheme.onSecondary),

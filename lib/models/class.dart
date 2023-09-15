@@ -1,21 +1,3 @@
-// class WeatherDailyModel {
-//   String image;
-//   String maxDegree;
-//   String minDegree;
-//   String status;
-//   WeatherDailyModel({
-//     required this.image,
-//     required this.date,
-//     required this.maxDegree,
-//     required this.minDegree,
-//     required this.status,
-//   });
-// }
-
-
-
-// ignore_for_file: prefer_interpolation_to_compose_strings
-
 class WeatherDayModel {
   String date;
   String image;
@@ -38,12 +20,11 @@ class WeatherDayModel {
   factory WeatherDayModel.fromJson(Map<String, dynamic> json) {
     return WeatherDayModel(
       date: json['date'],
-      image:'https:' +
-          json['day']['condition']['icon'],
-      maxDegreec:json['day']['maxtemp_c'],
-      minDegreec:json['day']['mintemp_c'],
-      maxDegreef:json['day']['maxtemp_f'],
-      minDegreef:json['day']['mintemp_f'],
+      image: 'https:' + json['day']['condition']['icon'],
+      maxDegreec: json['day']['maxtemp_c'],
+      minDegreec: json['day']['mintemp_c'],
+      maxDegreef: json['day']['maxtemp_f'],
+      minDegreef: json['day']['mintemp_f'],
       status: json['day']['condition']['text'],
     );
   }
@@ -74,7 +55,7 @@ class WeatherDailyModel {
   factory WeatherDailyModel.fromJson(Map<String, dynamic> json) {
     return WeatherDailyModel(
       date: json['forecast']['forecastday'][0]['date'],
-      image: 'https:' +
+      image: 'https:'+
           json['forecast']['forecastday'][0]['day']['condition']['icon'],
       maxDegreec: json['forecast']['forecastday'][0]['day']['maxtemp_c'],
       minDegreec: json['forecast']['forecastday'][0]['day']['mintemp_c'],
