@@ -109,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   child: Text(
                                     translation(context).cancel,
                                     style:
-                                        Theme.of(context).textTheme.bodySmall,
+                                        Theme.of(context).textTheme.displaySmall,
                                   ))
                             ],
                           ),

@@ -98,9 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      weather.location.localtime
-                                          .split('15:34')
-                                          .first,
+                                      weather.location.localtime,
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelSmall,

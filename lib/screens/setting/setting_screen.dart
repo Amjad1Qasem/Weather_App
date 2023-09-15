@@ -103,8 +103,8 @@ class _SettingScreenState extends State<SettingScreen> {
     tempIsCele = await SharedPreferences.getInstance();
     setState(() {
       setState(() {
-        isSelTemp[0] = tempIsCele.getBool('isSelTemp_0') ?? false;
-        isSelTemp[1] = tempIsCele.getBool('isSelTemp_1') ?? true;
+        isSelTemp[0] = tempIsCele.getBool('isSelTemp_0') ?? true;
+        isSelTemp[1] = tempIsCele.getBool('isSelTemp_1') ?? false;
       });
     });
   }
