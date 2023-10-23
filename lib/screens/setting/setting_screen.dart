@@ -23,14 +23,14 @@ class _SettingScreenState extends State<SettingScreen> {
       ? 'light'
       : 'dark';
 
-  late LocalizationState localizationCubitState =
-      BlocProvider.of<LocalizationCubit>(context).state;
-  late String languageSelected = localizationCubitState
-              is LocalizationFetched &&
-          (localizationCubitState as LocalizationFetched).locale.languageCode ==
-              'en'
-      ? 'light'
-      : 'dark';
+  // late LocalizationState localizationCubitState =
+  //     BlocProvider.of<LocalizationCubit>(context).state;
+  // late String languageSelected = localizationCubitState
+  //             is LocalizationFetched &&
+  //         (localizationCubitState as LocalizationFetched).locale.languageCode ==
+  //             'en'
+  //     ? 'light'
+  //     : 'dark';
 
   List<bool> isSelTemp = [true, false];
   List<bool> isSelWind = [true, false];

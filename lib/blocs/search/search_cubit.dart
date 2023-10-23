@@ -24,3 +24,4 @@ class SearchCubit extends Cubit<SearchState> {
     }
   }
 }
+ 
